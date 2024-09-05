@@ -1,0 +1,15 @@
+-- Query 1: Find order IDs where gloss_qty or poster_qty is greater than 4000
+SELECT id FROM orders WHERE gloss_qty > 4000 OR poster_qty > 4000;
+
+-- Query 2: Find orders where standard_qty is zero and either gloss_qty or poster_qty is over 1000
+SELECT * FROM orders WHERE standard_qty = 0 AND (gloss_qty > 1000 OR poster_qty > 1000);
+
+-- Query 3: Find company names starting with 'C' or 'W' and primary contact containing 'ana' but not 'eana'
+SELECT company_name FROM accounts WHERE (company_name LIKE 'C%' OR company_name LIKE 'W%') AND (primary_contact ILIKE '%ana%') AND primary_contact NOT ILIKE '%eana%';
+
+-- Query 4: Show region, sales rep name, and account name sorted alphabetically by account name
+SELECT region.name AS region_name, sales_reps.name AS sales_rep_name, accounts.name AS account_name
+FROM accounts
+JOIN sales_reps ON accounts.sales_rep_id = sales_reps.id
+JOIN region ON sales_reps.region_id = region.id
+ORDER BY account_name;
